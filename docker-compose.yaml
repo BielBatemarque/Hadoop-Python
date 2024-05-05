@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  namenode:
+    image: sequenceiq/hadoop-docker:2.7.1
+    container_name: namenode
+    expose:
+      - 50070
+    ports:
+      - "50070:50070"
+    environment:
+      - SERVICE_PRECONDITION=namenode
+    volumes:
+      - /data/hadoop/hdfs/namenode:/hadoop/dfs/name
+    command: /etc/bootstrap.sh -namenode
+
+  datanode:
+    image: sequenceiq/hadoop-docker:2.7.1
+    container_name: datanode
+    expose:
+      - 50075
+    ports:
+      - "50075:50075"
+    environment:
+      - SERVICE_PRECONDITION=datanode
+    volumes:
+      - /data/hadoop/hdfs/datanode:/hadoop/dfs/data
+    command: /etc/bootstrap.sh -datanode
+
+  resourcemanager:
+    image: sequenceiq/hadoop-docker:2.7.1
+    container_name: resourcemanager
+    expose:
+      - 8088
+    ports:
+      - "8088:8088"

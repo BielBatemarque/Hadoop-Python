@@ -1,7 +1,11 @@
-import sys
 
-for line in sys.stdin:
-    palavras = line.strip().split()
+from mrjob.job import MRJob
+import re
 
-    for palavra in palavras:
-        print(f"{palavra}\t1")
+class MRWordFrequencyCountMapper(MRJob):
+
+    def mapper(self, _, line):
+        # Usa expressão regular para encontrar todas as palavras na linha
+        for word in re.findall(r'\w+', line):
+            # Emite cada palavra com contagem 1
+            yield word.lower(), 1

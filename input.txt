@@ -1,0 +1,3 @@
+Este é um teste para o MRJob.
+Outra linha para testar.
+Mais uma linha de teste.
